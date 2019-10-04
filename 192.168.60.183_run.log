@@ -1,0 +1,13 @@
+
+2019-10-04 18:54:52,922 -- System Initialized --
+2019-10-04 18:55:15,764 Start: Encrypting 16kb-file.txt.ac
+2019-10-04 18:55:15,765 Start: Opening Public Key For 16kb-file.txt
+2019-10-04 18:55:15,769 Start: Reading Binary File 16kb-file.txt.ac
+2019-10-04 18:55:15,771 Start: Now Encrypting 16kb-file.txt.ac
+2019-10-04 18:55:15,795 Start: Write Encrypted File 16kb-file.txt.ac
+2019-10-04 18:55:15,919 Finish: Done Ecrypting 16kb-file.txt.ac
+2019-10-04 18:55:15,932 Start: Decrypting 16kb-file.txt.ac
+2019-10-04 18:55:15,933 Start: Opening Private Key For 16kb-file.txt
+2019-10-04 18:55:15,935 Start: Reading Binary File 16kb-file.txt.ac
+2019-10-04 18:55:15,937 Start: Now Decrypting and Write File 16kb-file.txt.ac
+2019-10-04 18:55:16,220 Finish: Done Decrypting 16kb-file.txt.ac

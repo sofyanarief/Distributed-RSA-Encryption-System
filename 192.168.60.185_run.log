@@ -1,0 +1,13 @@
+
+2019-10-04 18:55:00,772 -- System Initialized --
+2019-10-04 18:55:15,765 Start: Encrypting 16kb-file.txt.ae
+2019-10-04 18:55:15,766 Start: Opening Public Key For 16kb-file.txt
+2019-10-04 18:55:15,768 Start: Reading Binary File 16kb-file.txt.ae
+2019-10-04 18:55:15,771 Start: Now Encrypting 16kb-file.txt.ae
+2019-10-04 18:55:15,794 Start: Write Encrypted File 16kb-file.txt.ae
+2019-10-04 18:55:15,920 Finish: Done Ecrypting 16kb-file.txt.ae
+2019-10-04 18:55:15,936 Start: Decrypting 16kb-file.txt.ae
+2019-10-04 18:55:15,936 Start: Opening Private Key For 16kb-file.txt
+2019-10-04 18:55:15,938 Start: Reading Binary File 16kb-file.txt.ae
+2019-10-04 18:55:15,940 Start: Now Decrypting and Write File 16kb-file.txt.ae
+2019-10-04 18:55:16,219 Finish: Done Decrypting 16kb-file.txt.ae

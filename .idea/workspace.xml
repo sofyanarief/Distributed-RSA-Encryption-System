@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="86e3cbc4-1b6a-4494-b2e8-d41a8acc657b" name="Default Changelist" comment="" />
+    <list default="true" id="86e3cbc4-1b6a-4494-b2e8-d41a8acc657b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/penelitian2019.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/penelitian2019.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/192.168.60.181_run.log" beforeDir="false" afterPath="$PROJECT_DIR$/192.168.60.181_run.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/192.168.60.182_run.log" beforeDir="false" afterPath="$PROJECT_DIR$/192.168.60.182_run.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/192.168.60.183_run.log" beforeDir="false" afterPath="$PROJECT_DIR$/192.168.60.183_run.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/192.168.60.184_run.log" beforeDir="false" afterPath="$PROJECT_DIR$/192.168.60.184_run.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/192.168.60.185_run.log" beforeDir="false" afterPath="$PROJECT_DIR$/192.168.60.185_run.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Broker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Broker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DecryptThreads.py" beforeDir="false" afterPath="$PROJECT_DIR$/DecryptThreads.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EncryptThreads.py" beforeDir="false" afterPath="$PROJECT_DIR$/EncryptThreads.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EncryptionProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/EncryptionProcessor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Worker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/broker_run.log" beforeDir="false" afterPath="$PROJECT_DIR$/broker_run.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/penelitian.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +36,14 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Ri6tkIUQtVJpqqBbUzjMNawG9s" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
@@ -50,5 +76,18 @@
       <updated>1570137785869</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

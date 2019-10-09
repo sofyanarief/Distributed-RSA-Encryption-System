@@ -1,13 +1,1 @@
 
-2019-10-04 18:54:56,765 -- System Initialized --
-2019-10-04 18:55:15,762 Start: Encrypting 16kb-file.txt.ad
-2019-10-04 18:55:15,763 Start: Opening Public Key For 16kb-file.txt
-2019-10-04 18:55:15,766 Start: Reading Binary File 16kb-file.txt.ad
-2019-10-04 18:55:15,769 Start: Now Encrypting 16kb-file.txt.ad
-2019-10-04 18:55:15,793 Start: Write Encrypted File 16kb-file.txt.ad
-2019-10-04 18:55:15,917 Finish: Done Ecrypting 16kb-file.txt.ad
-2019-10-04 18:55:15,932 Start: Decrypting 16kb-file.txt.ad
-2019-10-04 18:55:15,933 Start: Opening Private Key For 16kb-file.txt
-2019-10-04 18:55:15,935 Start: Reading Binary File 16kb-file.txt.ad
-2019-10-04 18:55:15,936 Start: Now Decrypting and Write File 16kb-file.txt.ad
-2019-10-04 18:55:16,218 Finish: Done Decrypting 16kb-file.txt.ad

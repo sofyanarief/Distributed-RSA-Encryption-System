@@ -1,13 +1,1 @@
 
-2019-10-04 18:54:48,240 -- System Initialized --
-2019-10-04 18:55:15,756 Start: Encrypting 16kb-file.txt.ab
-2019-10-04 18:55:15,757 Start: Opening Public Key For 16kb-file.txt
-2019-10-04 18:55:15,760 Start: Reading Binary File 16kb-file.txt.ab
-2019-10-04 18:55:15,762 Start: Now Encrypting 16kb-file.txt.ab
-2019-10-04 18:55:15,786 Start: Write Encrypted File 16kb-file.txt.ab
-2019-10-04 18:55:15,912 Finish: Done Ecrypting 16kb-file.txt.ab
-2019-10-04 18:55:15,925 Start: Decrypting 16kb-file.txt.ab
-2019-10-04 18:55:15,926 Start: Opening Private Key For 16kb-file.txt
-2019-10-04 18:55:15,930 Start: Reading Binary File 16kb-file.txt.ab
-2019-10-04 18:55:15,931 Start: Now Decrypting and Write File 16kb-file.txt.ab
-2019-10-04 18:55:16,214 Finish: Done Decrypting 16kb-file.txt.ab

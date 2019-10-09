@@ -12,7 +12,7 @@ class EncryptionProcessor:
     def __init__(self):
         self.workerIP = []
         self.workerRes = []
-        self.filePath = '/nfs-dir/'
+        self.filePath = '/nfs-dir/penelitian2019/'
         self.fileName = ''
         self.jobToHandle = []
         self.rawFilePath = 'raw-file/'
@@ -38,31 +38,6 @@ class EncryptionProcessor:
         print('-- Setting Key Size: ' + str(keySize) + ' --')
         logging.debug('-- Setting Key Size -> ' + str(keySize) + ' --')
         self.keySize = keySize
-
-    def get_AllWorkerRes(self):
-        logging.debug('Processing File : ' + self.fileName)
-        print('-- Getting All Worker Resource --')
-        logging.debug('Start: Getting All Worker Resource')
-        for idx in self.workerIP:
-            server = xmlrpclib.ServerProxy('http://' + idx + ':8000')
-            multi = xmlrpclib.MultiCall(server)
-            multi.get_CPU_Load()
-            multi.get_RAM_Used()
-            multi.get_RAM_Free()
-            respool = []
-            for response in multi():
-                respool.append(response)
-            self.workerRes.append(respool)
-        self.print_AllWorkerResource()
-
-    def print_AllWorkerResource(self):
-        print('-- Printing All Worker Resource --')
-        logging.debug('Start: Printing All Worker Resource')
-        for i in range(len(self.workerRes)):
-            print('Worker ' + repr(i + 1) + ':')
-            logging.debug('Worker ' + repr(i + 1) + ':')
-            for j in range(3):
-                print self.workerRes[i][j]
 
     def do_GenerateKeyForFile(self):
         print('-- Generating Public And Private Key --')
@@ -118,23 +93,6 @@ class EncryptionProcessor:
         logging.debug('File Splited Into ' + str(self.numPart) + ' Pieces')
         print('-- Every Pieces Has ' + str(splitSize) + ' Size --')
         logging.debug('Every Pieces Has ' + str(splitSize) + ' Size')
-
-    def do_CalculateJobAllocation(self):
-        print('-- Calculate Job Allocation --')
-        logging.debug('Start: Calculate Job Allocation')
-        curRes = []
-        totalCurRes = 0
-        for i in range(len(self.workerRes)):
-            curCPU = 0.7 * (1 - (float(self.workerRes[i][0]) / 100)) * (4 / 0.5)
-            curRAM = (1 - 0.3) * (1 - (float(self.workerRes[i][1]) / 100)) * (1024 / 256)
-            curRes.append(curCPU + curRAM)
-            totalCurRes = totalCurRes + curRes[i]
-        maxCurRes = max(curRes)
-        # print totalCurRes
-        # print maxCurRes
-        for j in range(len(self.workerRes)):
-            self.jobToHandle.append(int(round(curRes[j] / totalCurRes * self.numPart)))
-            print self.jobToHandle[j]
 
     def do_Encrypt(self):
         print('-- Calling Worker To Encrypt Splitted Files --')

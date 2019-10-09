@@ -11,31 +11,13 @@ from Crypto.Cipher import PKCS1_OAEP
 class Worker:
 
     def __init__(self):
-        self.filePath = '/mnt/nfs/'
+        self.filePath = '/mnt/nfs/penelitian2019/'
         self.rawFilePath = 'raw-file/'
         self.keyFilePath = 'key-file/'
         self.encryptedFilePath = 'enc-file/'
         self.decryptedFilePath = 'dec-file/'
         print('-- System Initialized --')
         logging.debug('-- System Initialized --')
-
-    def get_CPU_Load(self):
-        cpuLoad = repr(psutil.cpu_percent(interval=1, percpu=False))
-        # logging.debug('CPU Load = %s', cpuLoad)
-        return cpuLoad
-
-    def get_RAM_Used(self):
-        mem_info = repr(psutil.virtual_memory())
-        mem_info_arr = re.split(',',mem_info)
-        global used_mem_perc
-        used_mem_perc = re.split('=',mem_info_arr[2])
-        # logging.debug('RAM Used = %s', used_mem_perc[1])
-        return used_mem_perc[1]
-
-    def get_RAM_Free(self):
-        free_mem_perc = 100 - float(used_mem_perc[1])
-        # logging.debug('RAM Free = %s', repr(free_mem_perc))
-        return repr(free_mem_perc)
 
     def encrypt_blob(self, blob, public_key):
         # Import the Public Key and use for encryption using PKCS1_OAEP

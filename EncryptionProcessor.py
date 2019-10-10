@@ -48,6 +48,7 @@ class EncryptionProcessor:
             server = xmlrpclib.ServerProxy('http://' + idx + ':8000')
             multi = xmlrpclib.MultiCall(server)
             multi.get_CPU_Load()
+            multi.get_RAM_Used()
             for response in multi():
                 print(str(response))
                 logging.debug(str(response))

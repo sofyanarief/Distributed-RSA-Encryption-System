@@ -4,25 +4,23 @@ import logging
 
 class DecryptThreads(threading.Thread):
 
-    def __init__(self, threadID, idx, fileNameToDec, fileName):
+    def __init__(self, threadID, idx, startPart, endPart, fileName):
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.idx = idx
-        self.fileNameToDec = fileNameToDec
+        self.startPart = startPart
+        self.endPart = endPart
         self.fileName = fileName
 
     def run(self):
         logging.debug('Starting %s', self.threadID)
-        do_Decrypt(self.idx, self.fileNameToDec, self.fileName)
+        do_Decrypt(self.idx, self.startPart, self.endPart, self.fileName)
         logging.debug('Exiting %s', self.threadID)
 
 
-def do_Decrypt(idx, fileNameToDec, fileName):
-    # print idx
-    # print fileNameToEnc
-    # print fileName
+def do_Decrypt(idx, startPart, endPart, fileName):
     server = xmlrpclib.ServerProxy('http://' + idx + ':8000')
     multi = xmlrpclib.MultiCall(server)
-    multi.do_DecryptFile(fileNameToDec, fileName)
+    multi.do_DecryptFile(startPart, endPart, fileName)
     for response in multi():
         print(response)

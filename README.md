@@ -7,6 +7,6 @@ This project are focused to implement distributed computing in RSA encryption sy
 Clone this repo and manual edit Broker.py to fit your needs then run that file in python 2.7 compiler.
 
 ## Release note
-### [Version 1.0](https://github.com/sofyanarief/Distributed-RSA-Encryption-System/archive/1.0.zip) 
+### [Version 1.0](https://github.com/sofyanarief/Distributed-RSA-Encryption-System/releases/tag/1.0) 
 - Manual edit Broker.py (no shell interaction)
 - Distributed computing has been implemented by number of available workers

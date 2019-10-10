@@ -41,6 +41,18 @@ class EncryptionProcessor:
         logging.debug('Setting Key Size: ' + str(keySize))
         self.keySize = keySize
 
+    def get_AllWorkerRes(self):
+        print('Getting All Worker Resources')
+        logging.debug('Getting All Worker Resources')
+        for idx in self.workerIP:
+            server = xmlrpclib.ServerProxy('http://' + idx + ':8000')
+            multi = xmlrpclib.MultiCall(server)
+            multi.get_CPU_Load()
+            for response in multi():
+                print(str(response))
+                logging.debug(str(response))
+
+
     def do_GenerateKeyForFile(self):
         print('Start: Generating Public And Private Key')
         logging.debug('Start: Generating Public And Private Key')

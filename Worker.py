@@ -73,38 +73,46 @@ class Worker:
         # Base 64 encode the encrypted file
         return base64.b64encode(encrypted)
 
-    def do_EncryptFile(self, fileNameToEnc, fileName):
-        print('Encrypting ' + fileNameToEnc)
-        logging.debug('Encrypting ' + fileNameToEnc)
-        keyName = 'pub' + fileName + '.pem'
-        # print keyName
-        print('Opening Public Key For ' + fileName)
-        logging.debug('Opening Public Key For ' + fileName)
-        fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
-        public_key = fd.read()
-        fd.close()
+    def do_EncryptFile(self, startPart, endPart, fileName):
+        for partToEnc in range(startPart, endPart + 1):
+            strPartToEnc = str(partToEnc)
+            for i in range(0, 7 - len(strPartToEnc)):
+                strPartToEnc = '0' + strPartToEnc
+            print strPartToEnc
+            fileNameToEnc = fileName + '.' + strPartToEnc
+            print fileNameToEnc
 
-        print('Reading Binary File ' + fileNameToEnc)
-        logging.debug('Reading Binary File ' + fileNameToEnc)
-        # Our candidate file to be encrypted
-        fd = open(self.filePath + self.rawFilePath + fileNameToEnc, 'rb')
-        unencrypted_blob = fd.read()
-        fd.close()
+            print('Encrypting ' + fileNameToEnc)
+            logging.debug('Encrypting ' + fileNameToEnc)
+            keyName = 'pub' + fileName + '.pem'
+            # print keyName
+            print('Opening Public Key For ' + fileName)
+            logging.debug('Opening Public Key For ' + fileName)
+            fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
+            public_key = fd.read()
+            fd.close()
 
-        print('Start: Encrypting ' + fileNameToEnc)
-        logging.debug('Start: Encrypting ' + fileNameToEnc)
-        encrypted_blob = self.encrypt_blob(unencrypted_blob, public_key)
-        print('Done: Encrypting ' + fileNameToEnc)
-        logging.debug('Done: Encrypting ' + fileNameToEnc)
+            print('Reading Binary File ' + fileNameToEnc)
+            logging.debug('Reading Binary File ' + fileNameToEnc)
+            # Our candidate file to be encrypted
+            fd = open(self.filePath + self.rawFilePath + fileNameToEnc, 'rb')
+            unencrypted_blob = fd.read()
+            fd.close()
 
-        # Write the encrypted contents to a file
-        print('Write Encrypted File ' + fileNameToEnc)
-        logging.debug('Write Encrypted File ' + fileNameToEnc)
-        fd = open(self.filePath + self.encryptedFilePath + fileNameToEnc, 'wb')
-        fd.write(encrypted_blob)
-        fd.close()
-        print('Done Ecrypting ' + fileNameToEnc)
-        logging.debug('Done Ecrypting ' + fileNameToEnc)
+            print('Start: Encrypting ' + fileNameToEnc)
+            logging.debug('Start: Encrypting ' + fileNameToEnc)
+            encrypted_blob = self.encrypt_blob(unencrypted_blob, public_key)
+            print('Done: Encrypting ' + fileNameToEnc)
+            logging.debug('Done: Encrypting ' + fileNameToEnc)
+
+            # Write the encrypted contents to a file
+            print('Write Encrypted File ' + fileNameToEnc)
+            logging.debug('Write Encrypted File ' + fileNameToEnc)
+            fd = open(self.filePath + self.encryptedFilePath + fileNameToEnc, 'wb')
+            fd.write(encrypted_blob)
+            fd.close()
+            print('Done Ecrypting ' + fileNameToEnc)
+            logging.debug('Done Ecrypting ' + fileNameToEnc)
         return 'Done'
 
     def decrypt_blob(self, blob, private_key):
@@ -135,39 +143,46 @@ class Worker:
         # return the decompressed decrypted data
         return zlib.decompress(decrypted)
 
-    def do_DecryptFile(self, fileNameToDec, fileName):
-        print('Decrypting ' + fileNameToDec)
-        logging.debug('Decrypting ' + fileNameToDec)
-        keyName = 'priv' + fileName + '.pem'
+    def do_DecryptFile(self, startPart, endPart, fileName):
+        for partToDec in range(startPart, endPart + 1):
+            strPartToDec = str(partToDec)
+            for i in range(0, 7 - len(strPartToDec)):
+                strPartToDec = '0' + strPartToDec
+            print strPartToDec
+            fileNameToDec = fileName + '.' + strPartToDec
+            print fileNameToDec
+            print('Decrypting ' + fileNameToDec)
+            logging.debug('Decrypting ' + fileNameToDec)
+            keyName = 'priv' + fileName + '.pem'
 
-        # Use the private key for decryption
-        print('Opening Private Key For ' + fileName)
-        logging.debug('Opening Private Key For ' + fileName)
-        fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
-        private_key = fd.read()
-        fd.close()
+            # Use the private key for decryption
+            print('Opening Private Key For ' + fileName)
+            logging.debug('Opening Private Key For ' + fileName)
+            fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
+            private_key = fd.read()
+            fd.close()
 
-        # Our candidate file to be decrypted
-        print('Reading Binary File ' + fileNameToDec)
-        logging.debug('Reading Binary File ' + fileNameToDec)
-        fd = open(self.filePath + self.encryptedFilePath + fileNameToDec, 'rb')
-        encrypted_blob = fd.read()
-        fd.close()
+            print('Reading Binary File ' + fileNameToDec)
+            logging.debug('Reading Binary File ' + fileNameToDec)
+            # Our candidate file to be decrypted
+            fd = open(self.filePath + self.encryptedFilePath + fileNameToDec, 'rb')
+            encrypted_blob = fd.read()
+            fd.close()
 
-        print('Start: Decrypting File ' + fileNameToDec)
-        logging.debug('Start: Decrypting File ' + fileNameToDec)
-        decrypted_blob = self.decrypt_blob(encrypted_blob, private_key)
-        print('Done: Decrypting File ' + fileNameToDec)
-        logging.debug('Done: Decrypting File ' + fileNameToDec)
+            print('Start: Decrypting File ' + fileNameToDec)
+            logging.debug('Start: Decrypting File ' + fileNameToDec)
+            decrypted_blob = self.decrypt_blob(encrypted_blob, private_key)
+            print('Done: Decrypting File ' + fileNameToDec)
+            logging.debug('Done: Decrypting File ' + fileNameToDec)
 
-        # Write the decrypted contents to a file
-        print('Write Decrypted File ' + fileNameToDec)
-        logging.debug('Write Decrypted File ' + fileNameToDec)
-        fd = open(self.filePath + self.decryptedFilePath + fileNameToDec, 'wb')
-        fd.write(decrypted_blob)
-        fd.close()
-        print('Done Decrypted ' + fileNameToDec)
-        logging.debug('Done Decrypted ' + fileNameToDec)
+            # Write the decrypted contents to a file
+            print('Write Decrypted File ' + fileNameToDec)
+            logging.debug('Write Decrypted File ' + fileNameToDec)
+            fd = open(self.filePath + self.decryptedFilePath + fileNameToDec, 'wb')
+            fd.write(decrypted_blob)
+            fd.close()
+            print('Done Decrypted ' + fileNameToDec)
+            logging.debug('Done Decrypted ' + fileNameToDec)
         return 'Done'
 
 hostname = socket.gethostname()

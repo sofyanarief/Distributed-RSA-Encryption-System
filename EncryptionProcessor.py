@@ -96,7 +96,8 @@ class EncryptionProcessor:
     def do_SplitFile(self):
         print('Getting File Size')
         logging.debug('Getting File Size')
-        shl = subprocess.Popen("du -h " + self.filePath + self.rawFilePath + self.fileName, shell=True, stdout=subprocess.PIPE)
+        shl = subprocess.Popen("du -h " + self.filePath + self.rawFilePath + self.fileName, shell=True,
+                               stdout=subprocess.PIPE)
         stdout = shl.communicate()
         lim = stdout[0].find('\t')
         fileSize = stdout[0][0:lim]
@@ -104,22 +105,25 @@ class EncryptionProcessor:
             realFileSize = int(fileSize[0:-1]) * 1024
         elif fileSize[-1] is 'M':
             realFileSize = int(fileSize[0:-1]) * 1024 * 1024
-        elif fileSize[-1] is 'G':
-            realFileSize = int(fileSize[0:-1]) * 1024 * 1024 * 1024
         else:
             realFileSize = int(fileSize[0:-1])
-
         # print realFileSize
-        splitSize = float(realFileSize) / float(len(self.workerIP))
+
+        splitSize = self.keySize / 8
         # print splitSize
-        splitSize = int(round(splitSize))
-        # print splitSize
-        print('Start: Spliting File By Number of Workers')
-        logging.debug('Start: Spliting File By Number of Workers')
-        shl2 = subprocess.Popen("split -b " + str(splitSize) + " " + self.filePath + self.rawFilePath + self.fileName + " " + self.filePath + self.rawFilePath + self.fileName + ".",
-                               shell=True, stdout=subprocess.PIPE)
+
+        if realFileSize % splitSize != 0:
+            self.numPart = (realFileSize / splitSize) + 1
+        else:
+            self.numPart = (realFileSize / splitSize)
+        # print self.numPart
+
+        print('Start: Spliting File By Block Size')
+        logging.debug('Start: Spliting File By Block Size')
+        shl2 = subprocess.Popen("split -b " + str(
+            splitSize) + " " + self.filePath + self.rawFilePath + self.fileName + " " + self.filePath + self.rawFilePath + self.fileName + ". -da 7",
+                                shell=True, stdout=subprocess.PIPE)
         shl2.communicate()
-        self.numPart = int(round(float(realFileSize)/float(splitSize)))
         print('Done: Spliting File By Number of Workers')
         logging.debug('Done: Spliting File By Number of Workers')
         print('File Splited Into ' + str(self.numPart) + ' Pieces')
@@ -127,19 +131,43 @@ class EncryptionProcessor:
         print('Every Pieces Has ' + str(splitSize) + ' Size')
         logging.debug('Every Pieces Has ' + str(splitSize) + ' Size')
 
+    def do_CalculateJobAllocation(self):
+        print('Calculate Job Allocation')
+        logging.debug('Calculate Job Allocation')
+        curRes = []
+        totalCurRes = 0
+        for i in range(len(self.workerRes)):
+            curCPU = 0.7 * (1 - (float(self.workerRes[i][0]) / 100)) * (4 / 0.5)
+            curRAM = (1 - 0.3) * (1 - (float(self.workerRes[i][1]) / 100)) * (1024 / 256)
+            curRes.append(curCPU + curRAM)
+            totalCurRes = totalCurRes + curRes[i]
+        maxCurRes = max(curRes)
+        # print totalCurRes
+        # print maxCurRes
+        idxMaxRes = 0
+        for j in range(len(self.workerRes)):
+            if curRes[j] == maxCurRes:
+                idxMaxRes = j
+            self.jobToHandle.append(int(round(curRes[j] / totalCurRes * self.numPart)))
+            # print self.jobToHandle[j]
+        self.jobToHandle[idxMaxRes] = self.jobToHandle[idxMaxRes] + (self.numPart - sum(self.jobToHandle))
+        # print self.jobToHandle
+
     def do_Encrypt(self):
         print('Start: Calling Worker To Encrypt Splitted Files')
         logging.debug('Start: Calling Worker To Encrypt Splitted Files')
         convThread = []
-        fileNameToEnc = ''
-        suffix = 'a'
-        print suffix
+        i = 0
+        startPart = 0
         for idx in self.workerIP:
-            fileNameToEnc = self.fileName + '.a' + suffix
-            thread = EncryptThreads('Thread_a' + suffix, idx, fileNameToEnc, self.fileName)
+            print idx
+            print 'start : ' + str(startPart)
+            endPart = startPart + self.jobToHandle[i] - 1
+            print 'end : ' + str(endPart)
+            thread = EncryptThreads('Thread_' + str(i), idx, startPart, endPart, self.fileName)
             convThread.append(thread)
-            suffix = chr(ord(suffix)+1)
-            print suffix
+            startPart = endPart + 1
+            i += 1
 
         for j in convThread:
             j.start()
@@ -153,15 +181,17 @@ class EncryptionProcessor:
         print('Start: Calling Worker To Decrypt Splitted Files')
         logging.debug('Start: Calling Worker To Decrypt Splitted Files')
         convThread = []
-        fileNameToDec = ''
-        suffix = 'a'
-        print suffix
+        i = 0
+        startPart = 0
         for idx in self.workerIP:
-            fileNameToDec = self.fileName + '.a' + suffix
-            thread = DecryptThreads('Thread_a' + suffix, idx, fileNameToDec, self.fileName)
+            print idx
+            print 'start : ' + str(startPart)
+            endPart = startPart + self.jobToHandle[i] - 1
+            print 'end : ' + str(endPart)
+            thread = DecryptThreads('Thread_' + str(i), idx, startPart, endPart, self.fileName)
             convThread.append(thread)
-            suffix = chr(ord(suffix)+1)
-            print suffix
+            startPart = endPart + 1
+            i += 1
 
         for j in convThread:
             j.start()
@@ -175,9 +205,11 @@ class EncryptionProcessor:
     def do_MergeFile(self):
         print('Start: Merging Decrypted File')
         logging.debug('Start: Merging Decrypted File')
-        #print("cat " + self.filePath + self.decryptedFilePath + self.fileName + ".?? > " + self.filePath + self.decryptedFilePath + self.fileName)
-        shl = subprocess.Popen("cat " + self.filePath + self.decryptedFilePath + self.fileName + ".?? > " + self.filePath + self.decryptedFilePath + self.fileName, shell=True,
-                               stdout=subprocess.PIPE)
+        # print("cat " + self.filePath + self.decryptedFilePath + self.fileName + ".?? > " + self.filePath + self.decryptedFilePath + self.fileName)
+        shl = subprocess.Popen(
+            "cat " + self.filePath + self.decryptedFilePath + self.fileName + ".* > " + self.filePath + self.decryptedFilePath + self.fileName,
+            shell=True,
+            stdout=subprocess.PIPE)
         stdout = shl.communicate()
         print('Done: Merging Decypted Files')
         logging.debug('Done: Merging Decypted Files')

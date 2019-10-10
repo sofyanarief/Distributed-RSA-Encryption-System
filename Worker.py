@@ -21,6 +21,14 @@ class Worker:
         print('System Initialized')
         logging.debug('System Initialized')
 
+    def get_CPU_Load(self):
+        print('Getting CPU Load')
+        logging.debug('Getting CPU Load')
+        cpuLoad = repr(psutil.cpu_percent(interval=1, percpu=False))
+        print('CPU Load ' + str(cpuLoad))
+        logging.debug('CPU Load ' + str(cpuLoad))
+        return cpuLoad
+
     def encrypt_blob(self, blob, public_key):
         # Import the Public Key and use for encryption using PKCS1_OAEP
         rsa_key = RSA.importKey(public_key)

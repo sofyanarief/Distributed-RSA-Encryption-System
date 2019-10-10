@@ -10,3 +10,6 @@ Clone this repo and manual edit Broker.py to fit your needs then run that file i
 ### [Version 1.0](https://github.com/sofyanarief/Distributed-RSA-Encryption-System/releases/tag/1.0) 
 - Manual edit Broker.py (no shell interaction)
 - Distributed computing has been implemented by number of available workers
+### [Version 2.0](https://github.com/sofyanarief/Distributed-RSA-Encryption-System/releases/tag/2.0)
+- Still need to edit manually Broker.py (no shell interaction)
+- Distributed computing has been implemented by available resources on workers

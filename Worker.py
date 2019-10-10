@@ -29,6 +29,14 @@ class Worker:
         logging.debug('CPU Load ' + str(cpuLoad))
         return cpuLoad
 
+    def get_RAM_Used(self):
+        mem_info = repr(psutil.virtual_memory())
+        mem_info_arr = re.split(',',mem_info)
+        global used_mem_perc
+        used_mem_perc = re.split('=',mem_info_arr[2])
+        # logging.debug('RAM Used = %s', used_mem_perc[1])
+        return used_mem_perc[1]
+
     def encrypt_blob(self, blob, public_key):
         # Import the Public Key and use for encryption using PKCS1_OAEP
         rsa_key = RSA.importKey(public_key)

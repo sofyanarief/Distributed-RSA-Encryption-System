@@ -49,10 +49,20 @@ class EncryptionProcessor:
             multi = xmlrpclib.MultiCall(server)
             multi.get_CPU_Load()
             multi.get_RAM_Used()
+            respool = []
             for response in multi():
-                print(str(response))
-                logging.debug(str(response))
+                respool.append(response)
+            self.workerRes.append(respool)
+        self.print_AllWorkerResource()
 
+    def print_AllWorkerResource(self):
+        print('Printing All Worker Resources')
+        logging.debug('Printing All Worker Resources')
+        for i in range(len(self.workerRes)):
+            print('Worker ' + repr(i + 1) + ':')
+            logging.debug('Worker ' + repr(i + 1) + ':')
+            for j in range(len(self.workerRes[i])):
+                print self.workerRes[i][j]
 
     def do_GenerateKeyForFile(self):
         print('Start: Generating Public And Private Key')

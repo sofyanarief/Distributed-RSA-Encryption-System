@@ -18,4 +18,5 @@ if __name__ == '__main__':
     encryptionProcessor.do_Encrypt()
     encryptionProcessor.do_Decrypt()
     encryptionProcessor.do_MergeFile()
+    encryptionProcessor.do_CleaningTempFile()
     print('---- System Ending ----')

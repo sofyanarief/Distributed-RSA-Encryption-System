@@ -216,3 +216,60 @@ class EncryptionProcessor:
         stdout = shl.communicate()
         print('Done: Merging Decypted Files')
         logging.debug('Done: Merging Decypted Files')
+
+    def do_CleaningTempFile(self):
+        print('Start: Cleaning Temporary Files')
+        logging.debug('Start: Cleaning Temporary Files')
+
+        print('Start: Cleaning Temporary Splitted Files')
+        logging.debug('Start: Cleaning Temporary Splitted Files')
+        shl = subprocess.Popen(
+            "rm " + self.filePath + self.rawFilePath + self.fileName + ".*",
+            shell=True,
+            stdout=subprocess.PIPE)
+        stdout = shl.communicate()
+        print('Done: Cleaning Temporary Splitted Files')
+        logging.debug('Done: Cleaning Temporary Splitted Files')
+
+        print('Start: Cleaning Temporary Private Key File')
+        logging.debug('Start: Cleaning Temporary Private Key File')
+        shl = subprocess.Popen(
+            "rm " + self.filePath + self.keyFilePath + "priv" + self.fileName + ".pem",
+            shell=True,
+            stdout=subprocess.PIPE)
+        stdout = shl.communicate()
+        print('Done: Cleaning Temporary Private Key File')
+        logging.debug('Done: Cleaning Temporary Private Key File')
+
+        print('Start: Cleaning Temporary Public Key File')
+        logging.debug('Start: Cleaning Temporary Public Key File')
+        shl = subprocess.Popen(
+            "rm " + self.filePath + self.keyFilePath + "pub" + self.fileName + ".pem",
+            shell=True,
+            stdout=subprocess.PIPE)
+        stdout = shl.communicate()
+        print('Done: Cleaning Temporary Public Key File')
+        logging.debug('Done: Cleaning Temporary Public Key File')
+
+        print('Start: Cleaning Temporary Encrypted Files')
+        logging.debug('Start: Cleaning Temporary Encrypted Files')
+        shl = subprocess.Popen(
+            "rm " + self.filePath + self.encryptedFilePath + self.fileName + ".*",
+            shell=True,
+            stdout=subprocess.PIPE)
+        stdout = shl.communicate()
+        print('Done: Cleaning Temporary Encrypted Files')
+        logging.debug('Done: Cleaning Temporary Encrypted Files')
+
+        print('Start: Cleaning Temporary Decrypted Files')
+        logging.debug('Start: Cleaning Temporary Decrypted Files')
+        shl = subprocess.Popen(
+            "rm " + self.filePath + self.decryptedFilePath + self.fileName + ".*",
+            shell=True,
+            stdout=subprocess.PIPE)
+        stdout = shl.communicate()
+        print('Done: Cleaning Temporary Decrypted Files')
+        logging.debug('Done: Cleaning Temporary Decrypted Files')
+
+        print('Done: Cleaning Temporary Files')
+        logging.debug('Done: Cleaning Temporary Files')

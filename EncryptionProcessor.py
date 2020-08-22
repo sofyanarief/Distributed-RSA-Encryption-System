@@ -14,7 +14,7 @@ class EncryptionProcessor:
         logging.debug('Initializing System')
         self.workerIP = []
         self.workerRes = []
-        self.filePath = '/home/engine/PycharmProjects/Distributed-RSA-Encryption-System/'
+        self.filePath = '/nfs-share/'
         self.fileName = ''
         self.jobToHandle = []
         self.rawFilePath = 'raw-file/'
@@ -151,7 +151,7 @@ class EncryptionProcessor:
         for j in range(len(self.workerRes)):
             if curRes[j] == maxCurRes:
                 idxMaxRes = j
-            self.jobToHandle.append(int(round(curRes[j] / totalCurRes * self.numPart)))
+            self.jobToHandle.append(int(round(float(curRes[j]) / totalCurRes * self.numPart)))
             # print self.jobToHandle[j]
         self.jobToHandle[idxMaxRes] = self.jobToHandle[idxMaxRes] + (self.numPart - sum(self.jobToHandle))
         # print self.jobToHandle

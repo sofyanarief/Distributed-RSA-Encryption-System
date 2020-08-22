@@ -14,7 +14,7 @@ class Worker:
     def __init__(self):
         print('Initializing System')
         logging.debug('Initializing System')
-        self.filePath = '/home/engine/PycharmProjects/Distributed-RSA-Encryption-System/'
+        self.filePath = '/nfs-share/'
         self.rawFilePath = 'raw-file/'
         self.keyFilePath = 'key-file/'
         self.encryptedFilePath = 'enc-file/'
@@ -177,7 +177,7 @@ class Worker:
             private_key = fd.read()
             fd.close()
 
-            p = multiprocessing.Process(target=self.multiEncryptFile, args=(fileNameToDec, private_key))
+            p = multiprocessing.Process(target=self.multiDecryptFile, args=(fileNameToDec, private_key))
             procArr.append(p)
             p.start()
 

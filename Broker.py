@@ -6,7 +6,7 @@ from EncryptionProcessor import EncryptionProcessor
 if __name__ == '__main__':
     print('---- System Starting ----')
     encryptionProcessor = EncryptionProcessor()
-    encryptionProcessor.set_fileName('1mb-file.txt')
+    encryptionProcessor.set_fileName('10mb-file')
     # encryptionProcessor.set_fileName('16kb-file.txt')
     encryptionProcessor.set_keySize(4096)
     encryptionProcessor.do_GenerateKeyForFile()

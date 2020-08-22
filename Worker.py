@@ -79,6 +79,15 @@ class Worker:
 
     def do_EncryptFile(self, startPart, endPart, fileName):
         procArr = []
+
+        keyName = 'pub' + fileName + '.pem'
+        # print keyName
+        print('Opening Public Key For ' + fileName)
+        logging.debug('Opening Public Key For ' + fileName)
+        fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
+        public_key = fd.read()
+        fd.close()
+
         for partToEnc in range(startPart, endPart + 1):
             strPartToEnc = str(partToEnc)
             for i in range(0, 7 - len(strPartToEnc)):
@@ -86,14 +95,6 @@ class Worker:
             print strPartToEnc
             fileNameToEnc = fileName + '.' + strPartToEnc
             print fileNameToEnc
-
-            keyName = 'pub' + fileName + '.pem'
-            # print keyName
-            print('Opening Public Key For ' + fileName)
-            logging.debug('Opening Public Key For ' + fileName)
-            fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
-            public_key = fd.read()
-            fd.close()
 
             p = multiprocessing.Process(target=self.multiEncryptFile, args=(fileNameToEnc, public_key))
             procArr.append(p)
@@ -159,6 +160,16 @@ class Worker:
 
     def do_DecryptFile(self, startPart, endPart, fileName):
         procArr = []
+
+        keyName = 'priv' + fileName + '.pem'
+
+        # Use the private key for decryption
+        print('Opening Private Key For ' + fileName)
+        logging.debug('Opening Private Key For ' + fileName)
+        fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
+        private_key = fd.read()
+        fd.close()
+
         for partToDec in range(startPart, endPart + 1):
             strPartToDec = str(partToDec)
             for i in range(0, 7 - len(strPartToDec)):
@@ -166,16 +177,6 @@ class Worker:
             print strPartToDec
             fileNameToDec = fileName + '.' + strPartToDec
             print fileNameToDec
-            print('Decrypting ' + fileNameToDec)
-            logging.debug('Decrypting ' + fileNameToDec)
-            keyName = 'priv' + fileName + '.pem'
-
-            # Use the private key for decryption
-            print('Opening Private Key For ' + fileName)
-            logging.debug('Opening Private Key For ' + fileName)
-            fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
-            private_key = fd.read()
-            fd.close()
 
             p = multiprocessing.Process(target=self.multiDecryptFile, args=(fileNameToDec, private_key))
             procArr.append(p)
@@ -185,6 +186,9 @@ class Worker:
             process.join()
 
     def multiDecryptFile(self, fileNameToDec, private_key):
+        print('Decrypting ' + fileNameToDec)
+        logging.debug('Decrypting ' + fileNameToDec)
+
         print('Reading Binary File ' + fileNameToDec)
         logging.debug('Reading Binary File ' + fileNameToDec)
         # Our candidate file to be decrypted

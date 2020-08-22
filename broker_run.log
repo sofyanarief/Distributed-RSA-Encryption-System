@@ -1,1 +1,279 @@
 
+2020-08-22 06:10:48,606 Initializing System
+2020-08-22 06:10:48,669 System Initialized
+2020-08-22 06:10:48,669 Setting File To Process : 16kb-file.txt
+2020-08-22 06:10:48,669 Setting Key Size: 4096
+2020-08-22 06:10:48,669 Start: Generating Public And Private Key
+2020-08-22 06:10:49,473 Done: Generating Public And Private Key
+2020-08-22 06:10:49,473 Start: Writing Private Key To File
+2020-08-22 06:10:49,473 Done: Writing Private Key To File
+2020-08-22 06:10:49,473 Start: Writing Public Key To File
+2020-08-22 06:10:49,473 Done: Writing Public Key To File
+2020-08-22 06:10:49,473 Setting Worker IP: ['192.168.1.39']
+2020-08-22 06:10:49,473 Getting All Worker Resources
+2020-08-22 06:12:06,409 Initializing System
+2020-08-22 06:12:06,410 System Initialized
+2020-08-22 06:12:06,410 Setting File To Process : 16kb-file.txt
+2020-08-22 06:12:06,410 Setting Key Size: 4096
+2020-08-22 06:12:06,410 Start: Generating Public And Private Key
+2020-08-22 06:12:07,524 Done: Generating Public And Private Key
+2020-08-22 06:12:07,524 Start: Writing Private Key To File
+2020-08-22 06:12:07,525 Done: Writing Private Key To File
+2020-08-22 06:12:07,525 Start: Writing Public Key To File
+2020-08-22 06:12:07,525 Done: Writing Public Key To File
+2020-08-22 06:12:07,525 Setting Worker IP: ['192.168.1.39']
+2020-08-22 06:12:07,525 Getting All Worker Resources
+2020-08-22 06:13:05,434 Initializing System
+2020-08-22 06:13:05,434 System Initialized
+2020-08-22 06:13:05,434 Setting File To Process : 16kb-file.txt
+2020-08-22 06:13:05,434 Setting Key Size: 4096
+2020-08-22 06:13:05,434 Start: Generating Public And Private Key
+2020-08-22 06:13:07,433 Done: Generating Public And Private Key
+2020-08-22 06:13:07,433 Start: Writing Private Key To File
+2020-08-22 06:13:07,433 Done: Writing Private Key To File
+2020-08-22 06:13:07,433 Start: Writing Public Key To File
+2020-08-22 06:13:07,434 Done: Writing Public Key To File
+2020-08-22 06:13:07,434 Setting Worker IP: ['192.168.1.39']
+2020-08-22 06:13:07,434 Getting All Worker Resources
+2020-08-22 06:16:27,551 Initializing System
+2020-08-22 06:16:27,551 System Initialized
+2020-08-22 06:16:27,551 Setting File To Process : 16kb-file.txt
+2020-08-22 06:16:27,552 Setting Key Size: 4096
+2020-08-22 06:16:27,552 Start: Generating Public And Private Key
+2020-08-22 06:16:28,032 Done: Generating Public And Private Key
+2020-08-22 06:16:28,032 Start: Writing Private Key To File
+2020-08-22 06:16:28,033 Done: Writing Private Key To File
+2020-08-22 06:16:28,033 Start: Writing Public Key To File
+2020-08-22 06:16:28,033 Done: Writing Public Key To File
+2020-08-22 06:16:28,033 Setting Worker IP: ['192.168.1.36']
+2020-08-22 06:16:28,033 Getting All Worker Resources
+2020-08-22 06:16:29,039 Printing All Worker Resources
+2020-08-22 06:16:29,039 Worker 1:
+2020-08-22 06:16:29,039 Getting File Size
+2020-08-22 06:16:29,057 Start: Spliting File By Block Size
+2020-08-22 06:16:29,116 Done: Spliting File By Number of Workers
+2020-08-22 06:16:29,116 File Splited Into 32 Pieces
+2020-08-22 06:16:29,117 Every Pieces Has 512 Size
+2020-08-22 06:16:29,117 Calculate Job Allocation
+2020-08-22 06:32:09,284 Initializing System
+2020-08-22 06:32:09,284 System Initialized
+2020-08-22 06:32:09,284 Setting File To Process : 16kb-file.txt
+2020-08-22 06:32:09,284 Setting Key Size: 4096
+2020-08-22 06:32:09,284 Start: Generating Public And Private Key
+2020-08-22 06:32:09,704 Done: Generating Public And Private Key
+2020-08-22 06:32:09,705 Start: Writing Private Key To File
+2020-08-22 06:32:09,705 Done: Writing Private Key To File
+2020-08-22 06:32:09,705 Start: Writing Public Key To File
+2020-08-22 06:32:09,705 Done: Writing Public Key To File
+2020-08-22 06:32:09,705 Setting Worker IP: ['192.168.1.36']
+2020-08-22 06:32:09,705 Getting All Worker Resources
+2020-08-22 06:32:09,708 Printing All Worker Resources
+2020-08-22 06:32:09,708 Worker 1:
+2020-08-22 06:41:59,501 Initializing System
+2020-08-22 06:41:59,501 System Initialized
+2020-08-22 06:41:59,501 Setting File To Process : 16kb-file.txt
+2020-08-22 06:41:59,501 Setting Key Size: 4096
+2020-08-22 06:41:59,501 Start: Generating Public And Private Key
+2020-08-22 06:41:59,946 Done: Generating Public And Private Key
+2020-08-22 06:41:59,946 Start: Writing Private Key To File
+2020-08-22 06:41:59,946 Done: Writing Private Key To File
+2020-08-22 06:41:59,946 Start: Writing Public Key To File
+2020-08-22 06:41:59,946 Done: Writing Public Key To File
+2020-08-22 06:41:59,946 Setting Worker IP: ['192.168.1.36']
+2020-08-22 06:41:59,946 Getting All Worker Resources
+2020-08-22 06:41:59,949 Printing All Worker Resources
+2020-08-22 06:41:59,949 Worker 1:
+2020-08-22 06:41:59,949 Calculate Job Allocation
+2020-08-22 06:42:20,894 Initializing System
+2020-08-22 06:42:20,895 System Initialized
+2020-08-22 06:42:20,895 Setting File To Process : 16kb-file.txt
+2020-08-22 06:42:20,895 Setting Key Size: 4096
+2020-08-22 06:42:20,895 Start: Generating Public And Private Key
+2020-08-22 06:42:21,333 Done: Generating Public And Private Key
+2020-08-22 06:42:21,333 Start: Writing Private Key To File
+2020-08-22 06:42:21,334 Done: Writing Private Key To File
+2020-08-22 06:42:21,334 Start: Writing Public Key To File
+2020-08-22 06:42:21,334 Done: Writing Public Key To File
+2020-08-22 06:42:21,334 Setting Worker IP: ['192.168.1.36']
+2020-08-22 06:42:21,334 Getting All Worker Resources
+2020-08-22 06:42:21,337 Printing All Worker Resources
+2020-08-22 06:42:21,337 Worker 1:
+2020-08-22 06:42:21,337 Getting File Size
+2020-08-22 06:42:21,340 Start: Spliting File By Block Size
+2020-08-22 06:42:21,435 Done: Spliting File By Number of Workers
+2020-08-22 06:42:21,435 File Splited Into 32 Pieces
+2020-08-22 06:42:21,435 Every Pieces Has 512 Size
+2020-08-22 06:42:21,435 Calculate Job Allocation
+2020-08-22 06:42:49,127 Initializing System
+2020-08-22 06:42:49,127 System Initialized
+2020-08-22 06:42:49,127 Setting File To Process : 16kb-file.txt
+2020-08-22 06:42:49,127 Setting Key Size: 4096
+2020-08-22 06:42:49,127 Start: Generating Public And Private Key
+2020-08-22 06:42:50,366 Done: Generating Public And Private Key
+2020-08-22 06:42:50,366 Start: Writing Private Key To File
+2020-08-22 06:42:50,366 Done: Writing Private Key To File
+2020-08-22 06:42:50,366 Start: Writing Public Key To File
+2020-08-22 06:42:50,366 Done: Writing Public Key To File
+2020-08-22 06:42:50,366 Setting Worker IP: ['192.168.1.36']
+2020-08-22 06:42:50,366 Getting All Worker Resources
+2020-08-22 06:42:50,369 Printing All Worker Resources
+2020-08-22 06:42:50,369 Worker 1:
+2020-08-22 06:42:50,369 Getting File Size
+2020-08-22 06:42:50,372 Start: Spliting File By Block Size
+2020-08-22 06:42:50,428 Done: Spliting File By Number of Workers
+2020-08-22 06:42:50,428 File Splited Into 32 Pieces
+2020-08-22 06:42:50,428 Every Pieces Has 512 Size
+2020-08-22 06:42:50,428 Calculate Job Allocation
+2020-08-22 06:43:04,400 Initializing System
+2020-08-22 06:43:04,400 System Initialized
+2020-08-22 06:43:04,400 Setting File To Process : 16kb-file.txt
+2020-08-22 06:43:04,401 Setting Key Size: 4096
+2020-08-22 06:43:04,401 Start: Generating Public And Private Key
+2020-08-22 06:43:05,442 Done: Generating Public And Private Key
+2020-08-22 06:43:05,442 Start: Writing Private Key To File
+2020-08-22 06:43:05,444 Done: Writing Private Key To File
+2020-08-22 06:43:05,444 Start: Writing Public Key To File
+2020-08-22 06:43:05,444 Done: Writing Public Key To File
+2020-08-22 06:43:05,444 Setting Worker IP: ['192.168.1.36']
+2020-08-22 06:43:05,444 Getting All Worker Resources
+2020-08-22 06:43:05,447 Printing All Worker Resources
+2020-08-22 06:43:05,447 Worker 1:
+2020-08-22 06:43:05,447 Getting File Size
+2020-08-22 06:43:05,450 Start: Spliting File By Block Size
+2020-08-22 06:43:05,541 Done: Spliting File By Number of Workers
+2020-08-22 06:43:05,542 File Splited Into 32 Pieces
+2020-08-22 06:43:05,542 Every Pieces Has 512 Size
+2020-08-22 06:43:05,542 Calculate Job Allocation
+2020-08-22 06:55:10,415 Initializing System
+2020-08-22 06:55:10,415 System Initialized
+2020-08-22 06:55:10,415 Setting File To Process : 16kb-file.txt
+2020-08-22 06:55:10,415 Setting Key Size: 4096
+2020-08-22 06:55:10,415 Start: Generating Public And Private Key
+2020-08-22 06:55:11,565 Done: Generating Public And Private Key
+2020-08-22 06:55:11,565 Start: Writing Private Key To File
+2020-08-22 06:55:11,565 Done: Writing Private Key To File
+2020-08-22 06:55:11,565 Start: Writing Public Key To File
+2020-08-22 06:55:11,566 Done: Writing Public Key To File
+2020-08-22 06:55:11,566 Setting Worker IP: ['192.168.1.36']
+2020-08-22 06:55:11,566 Getting All Worker Resources
+2020-08-22 06:55:11,569 Printing All Worker Resources
+2020-08-22 06:55:11,569 Worker 1:
+2020-08-22 06:55:11,569 Getting File Size
+2020-08-22 06:55:11,571 Start: Spliting File By Block Size
+2020-08-22 06:55:11,623 Done: Spliting File By Number of Workers
+2020-08-22 06:55:11,624 File Splited Into 32 Pieces
+2020-08-22 06:55:11,624 Every Pieces Has 512 Size
+2020-08-22 06:55:11,624 Calculate Job Allocation
+2020-08-22 06:55:11,624 Start: Calling Worker To Encrypt Splitted Files
+2020-08-22 06:55:11,624 Starting Thread_0
+2020-08-22 06:55:11,626 Exiting Thread_0
+2020-08-22 06:55:11,626 Done: Calling Worker To Encrypt Splitted Files
+2020-08-22 06:55:11,627 Start: Calling Worker To Decrypt Splitted Files
+2020-08-22 06:55:11,627 Starting Thread_0
+2020-08-22 06:55:11,628 Exiting Thread_0
+2020-08-22 06:55:11,628 Done: Calling Worker To Decrypt Splitted Files
+2020-08-22 07:11:29,244 Initializing System
+2020-08-22 07:11:29,244 System Initialized
+2020-08-22 07:11:29,244 Setting File To Process : 16kb-file.txt
+2020-08-22 07:11:29,244 Setting Key Size: 4096
+2020-08-22 07:11:29,244 Start: Generating Public And Private Key
+2020-08-22 07:11:30,576 Done: Generating Public And Private Key
+2020-08-22 07:11:30,576 Start: Writing Private Key To File
+2020-08-22 07:11:30,576 Done: Writing Private Key To File
+2020-08-22 07:11:30,576 Start: Writing Public Key To File
+2020-08-22 07:11:30,576 Done: Writing Public Key To File
+2020-08-22 07:11:30,576 Setting Worker IP: ['192.168.1.36']
+2020-08-22 07:11:30,576 Getting All Worker Resources
+2020-08-22 07:11:30,579 Printing All Worker Resources
+2020-08-22 07:11:30,579 Worker 1:
+2020-08-22 07:11:30,579 Getting File Size
+2020-08-22 07:11:30,582 Start: Spliting File By Block Size
+2020-08-22 07:11:30,667 Done: Spliting File By Number of Workers
+2020-08-22 07:11:30,667 File Splited Into 32 Pieces
+2020-08-22 07:11:30,667 Every Pieces Has 512 Size
+2020-08-22 07:11:30,667 Calculate Job Allocation
+2020-08-22 07:11:30,667 Start: Calling Worker To Encrypt Splitted Files
+2020-08-22 07:11:30,668 Starting Thread_0
+2020-08-22 07:11:30,967 Exiting Thread_0
+2020-08-22 07:11:30,968 Done: Calling Worker To Encrypt Splitted Files
+2020-08-22 07:11:30,968 Start: Calling Worker To Decrypt Splitted Files
+2020-08-22 07:11:30,968 Starting Thread_0
+2020-08-22 07:11:31,005 Done: Calling Worker To Decrypt Splitted Files
+2020-08-22 07:12:49,133 Initializing System
+2020-08-22 07:12:49,133 System Initialized
+2020-08-22 07:12:49,133 Setting File To Process : 16kb-file.txt
+2020-08-22 07:12:49,133 Setting Key Size: 4096
+2020-08-22 07:12:49,133 Start: Generating Public And Private Key
+2020-08-22 07:12:50,268 Done: Generating Public And Private Key
+2020-08-22 07:12:50,268 Start: Writing Private Key To File
+2020-08-22 07:12:50,268 Done: Writing Private Key To File
+2020-08-22 07:12:50,268 Start: Writing Public Key To File
+2020-08-22 07:12:50,268 Done: Writing Public Key To File
+2020-08-22 07:12:50,268 Setting Worker IP: ['192.168.1.36']
+2020-08-22 07:12:50,268 Getting All Worker Resources
+2020-08-22 07:12:50,271 Printing All Worker Resources
+2020-08-22 07:12:50,271 Worker 1:
+2020-08-22 07:12:50,271 Getting File Size
+2020-08-22 07:12:50,274 Start: Spliting File By Block Size
+2020-08-22 07:12:50,277 Done: Spliting File By Number of Workers
+2020-08-22 07:12:50,277 File Splited Into 32 Pieces
+2020-08-22 07:12:50,277 Every Pieces Has 512 Size
+2020-08-22 07:12:50,277 Calculate Job Allocation
+2020-08-22 07:12:50,277 Start: Calling Worker To Encrypt Splitted Files
+2020-08-22 07:12:50,278 Starting Thread_0
+2020-08-22 07:12:50,591 Exiting Thread_0
+2020-08-22 07:12:50,592 Done: Calling Worker To Encrypt Splitted Files
+2020-08-22 07:14:43,616 Initializing System
+2020-08-22 07:14:43,616 System Initialized
+2020-08-22 07:14:43,616 Setting File To Process : 16kb-file.txt
+2020-08-22 07:14:43,616 Setting Key Size: 4096
+2020-08-22 07:14:43,616 Start: Generating Public And Private Key
+2020-08-22 07:14:44,292 Done: Generating Public And Private Key
+2020-08-22 07:14:44,292 Start: Writing Private Key To File
+2020-08-22 07:14:44,292 Done: Writing Private Key To File
+2020-08-22 07:14:44,292 Start: Writing Public Key To File
+2020-08-22 07:14:44,292 Done: Writing Public Key To File
+2020-08-22 07:14:44,292 Setting Worker IP: ['192.168.1.36']
+2020-08-22 07:14:44,292 Getting All Worker Resources
+2020-08-22 07:14:44,295 Printing All Worker Resources
+2020-08-22 07:14:44,295 Worker 1:
+2020-08-22 07:14:44,295 Getting File Size
+2020-08-22 07:14:44,298 Start: Spliting File By Block Size
+2020-08-22 07:14:44,461 Done: Spliting File By Number of Workers
+2020-08-22 07:14:44,461 File Splited Into 32 Pieces
+2020-08-22 07:14:44,461 Every Pieces Has 512 Size
+2020-08-22 07:14:44,461 Calculate Job Allocation
+2020-08-22 07:14:44,461 Start: Calling Worker To Encrypt Splitted Files
+2020-08-22 07:14:44,462 Starting Thread_0
+2020-08-22 07:14:44,528 Exiting Thread_0
+2020-08-22 07:14:44,529 Done: Calling Worker To Encrypt Splitted Files
+2020-08-22 07:19:52,658 Initializing System
+2020-08-22 07:19:52,658 System Initialized
+2020-08-22 07:19:52,658 Setting File To Process : 16kb-file.txt
+2020-08-22 07:19:52,658 Setting Key Size: 4096
+2020-08-22 07:19:52,658 Start: Generating Public And Private Key
+2020-08-22 07:19:53,629 Done: Generating Public And Private Key
+2020-08-22 07:19:53,629 Start: Writing Private Key To File
+2020-08-22 07:19:53,630 Done: Writing Private Key To File
+2020-08-22 07:19:53,630 Start: Writing Public Key To File
+2020-08-22 07:19:53,630 Done: Writing Public Key To File
+2020-08-22 07:19:53,630 Setting Worker IP: ['192.168.1.36']
+2020-08-22 07:19:53,630 Getting All Worker Resources
+2020-08-22 07:19:53,633 Printing All Worker Resources
+2020-08-22 07:19:53,633 Worker 1:
+2020-08-22 07:19:53,633 Getting File Size
+2020-08-22 07:19:53,635 Start: Spliting File By Block Size
+2020-08-22 07:19:53,728 Done: Spliting File By Number of Workers
+2020-08-22 07:19:53,728 File Splited Into 32 Pieces
+2020-08-22 07:19:53,728 Every Pieces Has 512 Size
+2020-08-22 07:19:53,728 Calculate Job Allocation
+2020-08-22 07:19:53,728 Start: Calling Worker To Encrypt Splitted Files
+2020-08-22 07:19:53,729 Starting Thread_0
+2020-08-22 07:19:53,806 Exiting Thread_0
+2020-08-22 07:19:53,806 Done: Calling Worker To Encrypt Splitted Files
+2020-08-22 07:19:53,807 Start: Calling Worker To Decrypt Splitted Files
+2020-08-22 07:19:53,807 Starting Thread_0
+2020-08-22 07:19:53,898 Exiting Thread_0
+2020-08-22 07:19:53,898 Done: Calling Worker To Decrypt Splitted Files
+2020-08-22 07:19:53,898 Start: Merging Decrypted File
+2020-08-22 07:19:53,902 Done: Merging Decypted Files

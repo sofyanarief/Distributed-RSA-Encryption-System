@@ -1,4 +1,5 @@
 import base64
+import multiprocessing
 import socket
 import zlib
 from SimpleXMLRPCServer import SimpleXMLRPCServer
@@ -13,7 +14,7 @@ class Worker:
     def __init__(self):
         print('Initializing System')
         logging.debug('Initializing System')
-        self.filePath = '/mnt/nfs/penelitian2019/'
+        self.filePath = '/home/engine/PycharmProjects/Distributed-RSA-Encryption-System/'
         self.rawFilePath = 'raw-file/'
         self.keyFilePath = 'key-file/'
         self.encryptedFilePath = 'enc-file/'
@@ -36,6 +37,9 @@ class Worker:
         used_mem_perc = re.split('=',mem_info_arr[2])
         # logging.debug('RAM Used = %s', used_mem_perc[1])
         return used_mem_perc[1]
+
+    def get_CPU_CoreNum(self):
+        return multiprocessing.cpu_count()
 
     def encrypt_blob(self, blob, public_key):
         # Import the Public Key and use for encryption using PKCS1_OAEP
@@ -74,6 +78,7 @@ class Worker:
         return base64.b64encode(encrypted)
 
     def do_EncryptFile(self, startPart, endPart, fileName):
+        procArr = []
         for partToEnc in range(startPart, endPart + 1):
             strPartToEnc = str(partToEnc)
             for i in range(0, 7 - len(strPartToEnc)):
@@ -82,8 +87,6 @@ class Worker:
             fileNameToEnc = fileName + '.' + strPartToEnc
             print fileNameToEnc
 
-            print('Encrypting ' + fileNameToEnc)
-            logging.debug('Encrypting ' + fileNameToEnc)
             keyName = 'pub' + fileName + '.pem'
             # print keyName
             print('Opening Public Key For ' + fileName)
@@ -92,27 +95,38 @@ class Worker:
             public_key = fd.read()
             fd.close()
 
-            print('Reading Binary File ' + fileNameToEnc)
-            logging.debug('Reading Binary File ' + fileNameToEnc)
-            # Our candidate file to be encrypted
-            fd = open(self.filePath + self.rawFilePath + fileNameToEnc, 'rb')
-            unencrypted_blob = fd.read()
-            fd.close()
+            p = multiprocessing.Process(target=self.multiEncryptFile, args=(fileNameToEnc, public_key))
+            procArr.append(p)
+            p.start()
 
-            print('Start: Encrypting ' + fileNameToEnc)
-            logging.debug('Start: Encrypting ' + fileNameToEnc)
-            encrypted_blob = self.encrypt_blob(unencrypted_blob, public_key)
-            print('Done: Encrypting ' + fileNameToEnc)
-            logging.debug('Done: Encrypting ' + fileNameToEnc)
+        for process in procArr:
+            process.join()
 
-            # Write the encrypted contents to a file
-            print('Write Encrypted File ' + fileNameToEnc)
-            logging.debug('Write Encrypted File ' + fileNameToEnc)
-            fd = open(self.filePath + self.encryptedFilePath + fileNameToEnc, 'wb')
-            fd.write(encrypted_blob)
-            fd.close()
-            print('Done Ecrypting ' + fileNameToEnc)
-            logging.debug('Done Ecrypting ' + fileNameToEnc)
+    def multiEncryptFile(self, fileNameToEnc, public_key):
+        print('Encrypting ' + fileNameToEnc)
+        logging.debug('Encrypting ' + fileNameToEnc)
+
+        print('Reading Binary File ' + fileNameToEnc)
+        logging.debug('Reading Binary File ' + fileNameToEnc)
+        # Our candidate file to be encrypted
+        fd = open(self.filePath + self.rawFilePath + fileNameToEnc, 'rb')
+        unencrypted_blob = fd.read()
+        fd.close()
+
+        print('Start: Encrypting ' + fileNameToEnc)
+        logging.debug('Start: Encrypting ' + fileNameToEnc)
+        encrypted_blob = self.encrypt_blob(unencrypted_blob, public_key)
+        print('Done: Encrypting ' + fileNameToEnc)
+        logging.debug('Done: Encrypting ' + fileNameToEnc)
+
+        # Write the encrypted contents to a file
+        print('Write Encrypted File ' + fileNameToEnc)
+        logging.debug('Write Encrypted File ' + fileNameToEnc)
+        fd = open(self.filePath + self.encryptedFilePath + fileNameToEnc, 'wb')
+        fd.write(encrypted_blob)
+        fd.close()
+        print('Done Ecrypting ' + fileNameToEnc)
+        logging.debug('Done Ecrypting ' + fileNameToEnc)
         return 'Done'
 
     def decrypt_blob(self, blob, private_key):
@@ -144,6 +158,7 @@ class Worker:
         return zlib.decompress(decrypted)
 
     def do_DecryptFile(self, startPart, endPart, fileName):
+        procArr = []
         for partToDec in range(startPart, endPart + 1):
             strPartToDec = str(partToDec)
             for i in range(0, 7 - len(strPartToDec)):
@@ -162,27 +177,35 @@ class Worker:
             private_key = fd.read()
             fd.close()
 
-            print('Reading Binary File ' + fileNameToDec)
-            logging.debug('Reading Binary File ' + fileNameToDec)
-            # Our candidate file to be decrypted
-            fd = open(self.filePath + self.encryptedFilePath + fileNameToDec, 'rb')
-            encrypted_blob = fd.read()
-            fd.close()
+            p = multiprocessing.Process(target=self.multiEncryptFile, args=(fileNameToDec, private_key))
+            procArr.append(p)
+            p.start()
 
-            print('Start: Decrypting File ' + fileNameToDec)
-            logging.debug('Start: Decrypting File ' + fileNameToDec)
-            decrypted_blob = self.decrypt_blob(encrypted_blob, private_key)
-            print('Done: Decrypting File ' + fileNameToDec)
-            logging.debug('Done: Decrypting File ' + fileNameToDec)
+        for process in procArr:
+            process.join()
 
-            # Write the decrypted contents to a file
-            print('Write Decrypted File ' + fileNameToDec)
-            logging.debug('Write Decrypted File ' + fileNameToDec)
-            fd = open(self.filePath + self.decryptedFilePath + fileNameToDec, 'wb')
-            fd.write(decrypted_blob)
-            fd.close()
-            print('Done Decrypted ' + fileNameToDec)
-            logging.debug('Done Decrypted ' + fileNameToDec)
+    def multiDecryptFile(self, fileNameToDec, private_key):
+        print('Reading Binary File ' + fileNameToDec)
+        logging.debug('Reading Binary File ' + fileNameToDec)
+        # Our candidate file to be decrypted
+        fd = open(self.filePath + self.encryptedFilePath + fileNameToDec, 'rb')
+        encrypted_blob = fd.read()
+        fd.close()
+
+        print('Start: Decrypting File ' + fileNameToDec)
+        logging.debug('Start: Decrypting File ' + fileNameToDec)
+        decrypted_blob = self.decrypt_blob(encrypted_blob, private_key)
+        print('Done: Decrypting File ' + fileNameToDec)
+        logging.debug('Done: Decrypting File ' + fileNameToDec)
+
+        # Write the decrypted contents to a file
+        print('Write Decrypted File ' + fileNameToDec)
+        logging.debug('Write Decrypted File ' + fileNameToDec)
+        fd = open(self.filePath + self.decryptedFilePath + fileNameToDec, 'wb')
+        fd.write(decrypted_blob)
+        fd.close()
+        print('Done Decrypted ' + fileNameToDec)
+        logging.debug('Done Decrypted ' + fileNameToDec)
         return 'Done'
 
 hostname = socket.gethostname()

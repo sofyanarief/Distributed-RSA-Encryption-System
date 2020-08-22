@@ -14,7 +14,7 @@ class EncryptionProcessor:
         logging.debug('Initializing System')
         self.workerIP = []
         self.workerRes = []
-        self.filePath = '/nfs-dir/penelitian2019/'
+        self.filePath = '/home/engine/PycharmProjects/Distributed-RSA-Encryption-System/'
         self.fileName = ''
         self.jobToHandle = []
         self.rawFilePath = 'raw-file/'
@@ -47,8 +47,9 @@ class EncryptionProcessor:
         for idx in self.workerIP:
             server = xmlrpclib.ServerProxy('http://' + idx + ':8000')
             multi = xmlrpclib.MultiCall(server)
-            multi.get_CPU_Load()
-            multi.get_RAM_Used()
+            # multi.get_CPU_Load()
+            # multi.get_RAM_Used()
+            multi.get_CPU_CoreNum()
             respool = []
             for response in multi():
                 respool.append(response)
@@ -137,9 +138,11 @@ class EncryptionProcessor:
         curRes = []
         totalCurRes = 0
         for i in range(len(self.workerRes)):
-            curCPU = 0.7 * (1 - (float(self.workerRes[i][0]) / 100)) * (4 / 0.5)
-            curRAM = (1 - 0.3) * (1 - (float(self.workerRes[i][1]) / 100)) * (1024 / 256)
-            curRes.append(curCPU + curRAM)
+            # curCPU = 0.7 * (1 - (float(self.workerRes[i][0]) / 100)) * (4 / 0.5)
+            # curRAM = (1 - 0.3) * (1 - (float(self.workerRes[i][1]) / 100)) * (1024 / 256)
+            curCPUCore = self.workerRes[i][0]
+            curRes.append(curCPUCore)
+            # curRes.append(curCPU + curRAM)
             totalCurRes = totalCurRes + curRes[i]
         maxCurRes = max(curRes)
         # print totalCurRes

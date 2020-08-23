@@ -1,6 +1,8 @@
 import base64
+import copy_reg
 import multiprocessing
 import socket
+import types
 import zlib
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 import logging
@@ -8,6 +10,14 @@ import psutil
 import re
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
+
+def _pickle_method(m):
+    if m.im_self is None:
+        return getattr, (m.im_class, m.im_func.func_name)
+    else:
+        return getattr, (m.im_self, m.im_func.func_name)
+
+copy_reg.pickle(types.MethodType, _pickle_method)
 
 class Worker:
 
@@ -78,7 +88,9 @@ class Worker:
         return base64.b64encode(encrypted)
 
     def do_EncryptFile(self, startPart, endPart, fileName):
-        procArr = []
+        # procArr = []
+        # pool = multiprocessing.Pool(processes=self.get_CPU_CoreNum())
+        pool = multiprocessing.Pool()
 
         keyName = 'pub' + fileName + '.pem'
         # print keyName
@@ -96,12 +108,16 @@ class Worker:
             fileNameToEnc = fileName + '.' + strPartToEnc
             print fileNameToEnc
 
-            p = multiprocessing.Process(target=self.multiEncryptFile, args=(fileNameToEnc, public_key))
-            procArr.append(p)
-            p.start()
+            pool.apply(self.multiEncryptFile, args=(fileNameToEnc, public_key))
 
-        for process in procArr:
-            process.join()
+        pool.close()
+        pool.join()
+        #     p = multiprocessing.Process(target=self.multiEncryptFile, args=(fileNameToEnc, public_key))
+        #     procArr.append(p)
+        #     p.start()
+        #
+        # for process in procArr:
+        #     process.join()
 
     def multiEncryptFile(self, fileNameToEnc, public_key):
         print('Encrypting ' + fileNameToEnc)
@@ -159,7 +175,9 @@ class Worker:
         return zlib.decompress(decrypted)
 
     def do_DecryptFile(self, startPart, endPart, fileName):
-        procArr = []
+        # procArr = []
+        # pool = multiprocessing.Pool(processes=self.get_CPU_CoreNum())
+        pool = multiprocessing.Pool()
 
         keyName = 'priv' + fileName + '.pem'
 
@@ -178,12 +196,17 @@ class Worker:
             fileNameToDec = fileName + '.' + strPartToDec
             print fileNameToDec
 
-            p = multiprocessing.Process(target=self.multiDecryptFile, args=(fileNameToDec, private_key))
-            procArr.append(p)
-            p.start()
+            pool.apply(self.multiDecryptFile, args=(fileNameToDec, private_key))
 
-        for process in procArr:
-            process.join()
+        pool.close()
+        pool.join()
+
+        #     p = multiprocessing.Process(target=self.multiDecryptFile, args=(fileNameToDec, private_key))
+        #     procArr.append(p)
+        #     p.start()
+        #
+        # for process in procArr:
+        #     process.join()
 
     def multiDecryptFile(self, fileNameToDec, private_key):
         print('Decrypting ' + fileNameToDec)

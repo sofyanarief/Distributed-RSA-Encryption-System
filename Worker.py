@@ -88,9 +88,9 @@ class Worker:
         return base64.b64encode(encrypted)
 
     def do_EncryptFile(self, startPart, endPart, fileName):
-        # procArr = []
+        procArr = []
         # pool = multiprocessing.Pool(processes=self.get_CPU_CoreNum())
-        pool = multiprocessing.Pool()
+        # pool = multiprocessing.Pool()
 
         keyName = 'pub' + fileName + '.pem'
         # print keyName
@@ -108,16 +108,17 @@ class Worker:
             fileNameToEnc = fileName + '.' + strPartToEnc
             print fileNameToEnc
 
-            pool.apply(self.multiEncryptFile, args=(fileNameToEnc, public_key))
-
-        pool.close()
-        pool.join()
-        #     p = multiprocessing.Process(target=self.multiEncryptFile, args=(fileNameToEnc, public_key))
-        #     procArr.append(p)
-        #     p.start()
+        #     pool.apply(self.multiEncryptFile, args=(fileNameToEnc, public_key))
         #
-        # for process in procArr:
-        #     process.join()
+        # pool.close()
+        # pool.join()
+
+            p = multiprocessing.Process(target=self.multiEncryptFile, args=(fileNameToEnc, public_key))
+            procArr.append(p)
+            p.start()
+
+        for process in procArr:
+            process.join()
 
     def multiEncryptFile(self, fileNameToEnc, public_key):
         print('Encrypting ' + fileNameToEnc)
@@ -175,9 +176,9 @@ class Worker:
         return zlib.decompress(decrypted)
 
     def do_DecryptFile(self, startPart, endPart, fileName):
-        # procArr = []
+        procArr = []
         # pool = multiprocessing.Pool(processes=self.get_CPU_CoreNum())
-        pool = multiprocessing.Pool()
+        # pool = multiprocessing.Pool()
 
         keyName = 'priv' + fileName + '.pem'
 
@@ -196,17 +197,17 @@ class Worker:
             fileNameToDec = fileName + '.' + strPartToDec
             print fileNameToDec
 
-            pool.apply(self.multiDecryptFile, args=(fileNameToDec, private_key))
-
-        pool.close()
-        pool.join()
-
-        #     p = multiprocessing.Process(target=self.multiDecryptFile, args=(fileNameToDec, private_key))
-        #     procArr.append(p)
-        #     p.start()
+        #     pool.apply(self.multiDecryptFile, args=(fileNameToDec, private_key))
         #
-        # for process in procArr:
-        #     process.join()
+        # pool.close()
+        # pool.join()
+
+            p = multiprocessing.Process(target=self.multiDecryptFile, args=(fileNameToDec, private_key))
+            procArr.append(p)
+            p.start()
+
+        for process in procArr:
+            process.join()
 
     def multiDecryptFile(self, fileNameToDec, private_key):
         print('Decrypting ' + fileNameToDec)

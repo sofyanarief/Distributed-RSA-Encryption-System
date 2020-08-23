@@ -108,16 +108,27 @@ class EncryptionProcessor:
             realFileSize = int(fileSize[0:-1]) * 1024 * 1024
         else:
             realFileSize = int(fileSize[0:-1])
-        # print realFileSize
+        print realFileSize
 
-        splitSize = self.keySize / 8
+        # splitSize = self.keySize / 8
         # print splitSize
 
-        if realFileSize % splitSize != 0:
-            self.numPart = (realFileSize / splitSize) + 1
-        else:
-            self.numPart = (realFileSize / splitSize)
+        # if realFileSize % splitSize != 0:
+        #     self.numPart = (realFileSize / splitSize) + 1
+        # else:
+        #     self.numPart = (realFileSize / splitSize)
         # print self.numPart
+
+        self.numPart = 0
+        for i in range(len(self.workerRes)):
+            self.numPart = self.numPart + self.workerRes[i][0]
+        print self.numPart
+
+        if realFileSize % self.numPart != 0:
+            splitSize = (realFileSize / self.numPart) + (realFileSize % self.numPart)
+        else:
+            splitSize = (realFileSize / self.numPart)
+        print splitSize
 
         print('Start: Spliting File By Block Size')
         logging.debug('Start: Spliting File By Block Size')

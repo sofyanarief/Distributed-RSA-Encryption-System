@@ -97,18 +97,19 @@ class EncryptionProcessor:
     def do_SplitFile(self):
         print('Getting File Size')
         logging.debug('Getting File Size')
-        shl = subprocess.Popen("du -h " + self.filePath + self.rawFilePath + self.fileName, shell=True,
+        shl = subprocess.Popen("du " + self.filePath + self.rawFilePath + self.fileName, shell=True,
                                stdout=subprocess.PIPE)
         stdout = shl.communicate()
         lim = stdout[0].find('\t')
         fileSize = stdout[0][0:lim]
-        if fileSize[-1] is 'K':
-            realFileSize = int(fileSize[0:-1]) * 1024
-        elif fileSize[-1] is 'M':
-            realFileSize = int(fileSize[0:-1]) * 1024 * 1024
-        else:
-            realFileSize = int(fileSize[0:-1])
-        print realFileSize
+        realFileSize = int(fileSize)
+        # if fileSize[-1] is 'K':
+        #     realFileSize = int(fileSize[0:-1]) * 1024
+        # elif fileSize[-1] is 'M':
+        #     realFileSize = int(fileSize[0:-1]) * 1024 * 1024
+        # else:
+        #     realFileSize = int(fileSize[0:-1])
+        print str(realFileSize)
 
         # splitSize = self.keySize / 8
         # print splitSize
@@ -128,16 +129,16 @@ class EncryptionProcessor:
             splitSize = (realFileSize / self.numPart) + (realFileSize % self.numPart)
         else:
             splitSize = (realFileSize / self.numPart)
-        print splitSize
+        print str(splitSize)
 
-        print('Start: Spliting File By Block Size')
-        logging.debug('Start: Spliting File By Block Size')
+        print('Start: Spliting File')
+        logging.debug('Start: Spliting File')
         shl2 = subprocess.Popen("split -b " + str(
-            splitSize) + " " + self.filePath + self.rawFilePath + self.fileName + " " + self.filePath + self.rawFilePath + self.fileName + ". -da 7",
+            splitSize) + "k " + self.filePath + self.rawFilePath + self.fileName + " " + self.filePath + self.rawFilePath + self.fileName + ". -da 7",
                                 shell=True, stdout=subprocess.PIPE)
         shl2.communicate()
-        print('Done: Spliting File By Number of Workers')
-        logging.debug('Done: Spliting File By Number of Workers')
+        print('Done: Spliting File')
+        logging.debug('Done: Spliting File')
         print('File Splited Into ' + str(self.numPart) + ' Pieces')
         logging.debug('File Splited Into ' + str(self.numPart) + ' Pieces')
         print('Every Pieces Has ' + str(splitSize) + ' Size')
@@ -165,7 +166,7 @@ class EncryptionProcessor:
             self.jobToHandle.append(int(round(float(curRes[j]) / totalCurRes * self.numPart)))
             # print self.jobToHandle[j]
         self.jobToHandle[idxMaxRes] = self.jobToHandle[idxMaxRes] + (self.numPart - sum(self.jobToHandle))
-        # print self.jobToHandle
+        print self.jobToHandle
 
     def do_Encrypt(self):
         print('Start: Calling Worker To Encrypt Splitted Files')

@@ -16,13 +16,12 @@ class EncryptionProcessor:
         self.workerRes = []
         self.filePath = '/nfs-share/'
         self.fileName = ''
-        self.keyFileName = ''
         self.jobToHandle = []
         self.rawFilePath = 'raw-file/'
-        # self.keyFilePath = 'key-file/'
+        self.keyFilePath = 'key-file/'
         self.encryptedFilePath = 'enc-file/'
         self.decryptedFilePath = 'dec-file/'
-        # self.keySize = 128
+        self.keySize = 128
         self.numPart = 0
         print('System Initialized')
         logging.debug('System Initialized')
@@ -37,15 +36,10 @@ class EncryptionProcessor:
         logging.debug('Setting File To Process : ' + fileName)
         self.fileName = fileName
 
-    # def set_keySize(self, keySize):
-    #     print('Setting Key Size: ' + str(keySize))
-    #     logging.debug('Setting Key Size: ' + str(keySize))
-    #     self.keySize = keySize
-
-    def set_keyFileName(self, fileName):
-        print('Setting Key File Name To Process: ' + fileName)
-        logging.debug('Setting Key File Name To Process : ' + fileName)
-        self.keyFileName = fileName
+    def set_keySize(self, keySize):
+        print('Setting Key Size: ' + str(keySize))
+        logging.debug('Setting Key Size: ' + str(keySize))
+        self.keySize = keySize
 
     def get_AllWorkerRes(self):
         print('Getting All Worker Resources')
@@ -71,34 +65,34 @@ class EncryptionProcessor:
             for j in range(len(self.workerRes[i])):
                 print self.workerRes[i][j]
 
-    # def do_GenerateKeyForFile(self):
-    #     print('Start: Generating Public And Private Key')
-    #     logging.debug('Start: Generating Public And Private Key')
-    #     newKey = RSA.generate(self.keySize, e=65537)
-    #     private_key = newKey.exportKey("PEM")
-    #     public_key = newKey.publickey().exportKey("PEM")
-    #     print('Done: Generating Public And Private Key --')
-    #     logging.debug('Done: Generating Public And Private Key')
+    def do_GenerateKeyForFile(self):
+        print('Start: Generating Public And Private Key')
+        logging.debug('Start: Generating Public And Private Key')
+        newKey = RSA.generate(self.keySize, e=65537)
+        private_key = newKey.exportKey("PEM")
+        public_key = newKey.publickey().exportKey("PEM")
+        print('Done: Generating Public And Private Key --')
+        logging.debug('Done: Generating Public And Private Key')
 
-    #     print('Start: Writing Private Key To File')
-    #     logging.debug('Start: Writing Private Key To File')
-    #     # print(private_key)
-    #     # logging.debug(private_key)
-    #     fd = open(self.filePath + self.keyFilePath + "priv" + self.fileName + ".pem", "wb")
-    #     fd.write(private_key)
-    #     fd.close()
-    #     print('Done: Writing Private Key To File')
-    #     logging.debug('Done: Writing Private Key To File')
+        print('Start: Writing Private Key To File')
+        logging.debug('Start: Writing Private Key To File')
+        # print(private_key)
+        # logging.debug(private_key)
+        fd = open(self.filePath + self.keyFilePath + "priv" + self.fileName + ".pem", "wb")
+        fd.write(private_key)
+        fd.close()
+        print('Done: Writing Private Key To File')
+        logging.debug('Done: Writing Private Key To File')
 
-    #     print('Start: Writing Public Key To File')
-    #     logging.debug('Start: Writing Public Key To File')
-    #     # print(public_key)
-    #     # logging.debug(public_key)
-    #     fd = open(self.filePath + self.keyFilePath + "pub" + self.fileName + ".pem", "wb")
-    #     fd.write(public_key)
-    #     fd.close()
-    #     print('Done: Writing Public Key To File')
-    #     logging.debug('Done: Writing Public Key To File')
+        print('Start: Writing Public Key To File')
+        logging.debug('Start: Writing Public Key To File')
+        # print(public_key)
+        # logging.debug(public_key)
+        fd = open(self.filePath + self.keyFilePath + "pub" + self.fileName + ".pem", "wb")
+        fd.write(public_key)
+        fd.close()
+        print('Done: Writing Public Key To File')
+        logging.debug('Done: Writing Public Key To File')
 
     def do_SplitFile(self):
         print('Getting File Size')
@@ -185,7 +179,7 @@ class EncryptionProcessor:
             print 'start : ' + str(startPart)
             endPart = startPart + self.jobToHandle[i] - 1
             print 'end : ' + str(endPart)
-            thread = EncryptThreads('Thread_' + str(i), idx, startPart, endPart, self.fileName, self.keyFileName)
+            thread = EncryptThreads('Thread_' + str(i), idx, startPart, endPart, self.fileName)
             convThread.append(thread)
             startPart = endPart + 1
             i += 1
@@ -209,7 +203,7 @@ class EncryptionProcessor:
             print 'start : ' + str(startPart)
             endPart = startPart + self.jobToHandle[i] - 1
             print 'end : ' + str(endPart)
-            thread = DecryptThreads('Thread_' + str(i), idx, startPart, endPart, self.fileName, self.keyFileName)
+            thread = DecryptThreads('Thread_' + str(i), idx, startPart, endPart, self.fileName)
             convThread.append(thread)
             startPart = endPart + 1
             i += 1
@@ -235,59 +229,59 @@ class EncryptionProcessor:
         print('Done: Merging Decypted Files')
         logging.debug('Done: Merging Decypted Files')
 
-    # def do_CleaningTempFile(self):
-    #     print('Start: Cleaning Temporary Files')
-    #     logging.debug('Start: Cleaning Temporary Files')
+    def do_CleaningTempFile(self):
+        print('Start: Cleaning Temporary Files')
+        logging.debug('Start: Cleaning Temporary Files')
 
-    #     print('Start: Cleaning Temporary Splitted Files')
-    #     logging.debug('Start: Cleaning Temporary Splitted Files')
-    #     shl = subprocess.Popen(
-    #         "rm " + self.filePath + self.rawFilePath + self.fileName + ".*",
-    #         shell=True,
-    #         stdout=subprocess.PIPE)
-    #     stdout = shl.communicate()
-    #     print('Done: Cleaning Temporary Splitted Files')
-    #     logging.debug('Done: Cleaning Temporary Splitted Files')
+        print('Start: Cleaning Temporary Splitted Files')
+        logging.debug('Start: Cleaning Temporary Splitted Files')
+        shl = subprocess.Popen(
+            "rm " + self.filePath + self.rawFilePath + self.fileName + ".*",
+            shell=True,
+            stdout=subprocess.PIPE)
+        stdout = shl.communicate()
+        print('Done: Cleaning Temporary Splitted Files')
+        logging.debug('Done: Cleaning Temporary Splitted Files')
 
-    #     print('Start: Cleaning Temporary Private Key File')
-    #     logging.debug('Start: Cleaning Temporary Private Key File')
-    #     shl = subprocess.Popen(
-    #         "rm " + self.filePath + self.keyFilePath + "priv" + self.fileName + ".pem",
-    #         shell=True,
-    #         stdout=subprocess.PIPE)
-    #     stdout = shl.communicate()
-    #     print('Done: Cleaning Temporary Private Key File')
-    #     logging.debug('Done: Cleaning Temporary Private Key File')
+        print('Start: Cleaning Temporary Private Key File')
+        logging.debug('Start: Cleaning Temporary Private Key File')
+        shl = subprocess.Popen(
+            "rm " + self.filePath + self.keyFilePath + "priv" + self.fileName + ".pem",
+            shell=True,
+            stdout=subprocess.PIPE)
+        stdout = shl.communicate()
+        print('Done: Cleaning Temporary Private Key File')
+        logging.debug('Done: Cleaning Temporary Private Key File')
 
-    #     print('Start: Cleaning Temporary Public Key File')
-    #     logging.debug('Start: Cleaning Temporary Public Key File')
-    #     shl = subprocess.Popen(
-    #         "rm " + self.filePath + self.keyFilePath + "pub" + self.fileName + ".pem",
-    #         shell=True,
-    #         stdout=subprocess.PIPE)
-    #     stdout = shl.communicate()
-    #     print('Done: Cleaning Temporary Public Key File')
-    #     logging.debug('Done: Cleaning Temporary Public Key File')
+        print('Start: Cleaning Temporary Public Key File')
+        logging.debug('Start: Cleaning Temporary Public Key File')
+        shl = subprocess.Popen(
+            "rm " + self.filePath + self.keyFilePath + "pub" + self.fileName + ".pem",
+            shell=True,
+            stdout=subprocess.PIPE)
+        stdout = shl.communicate()
+        print('Done: Cleaning Temporary Public Key File')
+        logging.debug('Done: Cleaning Temporary Public Key File')
 
-    #     print('Start: Cleaning Temporary Encrypted Files')
-    #     logging.debug('Start: Cleaning Temporary Encrypted Files')
-    #     shl = subprocess.Popen(
-    #         "rm " + self.filePath + self.encryptedFilePath + self.fileName + ".*",
-    #         shell=True,
-    #         stdout=subprocess.PIPE)
-    #     stdout = shl.communicate()
-    #     print('Done: Cleaning Temporary Encrypted Files')
-    #     logging.debug('Done: Cleaning Temporary Encrypted Files')
+        print('Start: Cleaning Temporary Encrypted Files')
+        logging.debug('Start: Cleaning Temporary Encrypted Files')
+        shl = subprocess.Popen(
+            "rm " + self.filePath + self.encryptedFilePath + self.fileName + ".*",
+            shell=True,
+            stdout=subprocess.PIPE)
+        stdout = shl.communicate()
+        print('Done: Cleaning Temporary Encrypted Files')
+        logging.debug('Done: Cleaning Temporary Encrypted Files')
 
-    #     print('Start: Cleaning Temporary Decrypted Files')
-    #     logging.debug('Start: Cleaning Temporary Decrypted Files')
-    #     shl = subprocess.Popen(
-    #         "rm " + self.filePath + self.decryptedFilePath + self.fileName + ".*",
-    #         shell=True,
-    #         stdout=subprocess.PIPE)
-    #     stdout = shl.communicate()
-    #     print('Done: Cleaning Temporary Decrypted Files')
-    #     logging.debug('Done: Cleaning Temporary Decrypted Files')
+        print('Start: Cleaning Temporary Decrypted Files')
+        logging.debug('Start: Cleaning Temporary Decrypted Files')
+        shl = subprocess.Popen(
+            "rm " + self.filePath + self.decryptedFilePath + self.fileName + ".*",
+            shell=True,
+            stdout=subprocess.PIPE)
+        stdout = shl.communicate()
+        print('Done: Cleaning Temporary Decrypted Files')
+        logging.debug('Done: Cleaning Temporary Decrypted Files')
 
-    #     print('Done: Cleaning Temporary Files')
-    #     logging.debug('Done: Cleaning Temporary Files')
+        print('Done: Cleaning Temporary Files')
+        logging.debug('Done: Cleaning Temporary Files')

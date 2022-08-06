@@ -62,7 +62,7 @@ class Worker:
         # In determining the chunk size, determine the private key length used in bytes
         # and subtract 42 bytes (when using PKCS1_OAEP). The data will be in encrypted
         # in chunks
-        chunk_size = 86
+        chunk_size = 470
         offset = 0
         end_loop = False
         encrypted = ""
@@ -87,18 +87,18 @@ class Worker:
         # Base 64 encode the encrypted file
         return base64.b64encode(encrypted)
 
-    def do_EncryptFile(self, startPart, endPart, fileName, keyName):
+    def do_EncryptFile(self, startPart, endPart, fileName):
         procArr = []
         # pool = multiprocessing.Pool(processes=self.get_CPU_CoreNum())
         # pool = multiprocessing.Pool()
 
-        # keyName = 'pub' + keyName + '.pem'
-        # # print keyName
-        # print('Opening Public Key For ' + fileName)
-        # logging.debug('Opening Public Key For ' + fileName)
-        # fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
-        # public_key = fd.read()
-        # fd.close()
+        keyName = 'pub' + fileName + '.pem'
+        # print keyName
+        print('Opening Public Key For ' + fileName)
+        logging.debug('Opening Public Key For ' + fileName)
+        fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
+        public_key = fd.read()
+        fd.close()
 
         for partToEnc in range(startPart, endPart + 1):
             strPartToEnc = str(partToEnc)
@@ -113,22 +113,14 @@ class Worker:
         # pool.close()
         # pool.join()
 
-            p = multiprocessing.Process(target=self.multiEncryptFile, args=(fileName, fileNameToEnc, keyName))
+            p = multiprocessing.Process(target=self.multiEncryptFile, args=(fileNameToEnc, public_key))
             procArr.append(p)
             p.start()
 
         for process in procArr:
             process.join()
 
-    def multiEncryptFile(self, fileName, fileNameToEnc, keyName):
-        keyName = 'pub' + keyName + '.pem'
-        # print keyName
-        print('Opening Public Key For ' + fileName)
-        logging.debug('Opening Public Key For ' + fileName)
-        fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
-        public_key = fd.read()
-        fd.close()
-
+    def multiEncryptFile(self, fileNameToEnc, public_key):
         print('Encrypting ' + fileNameToEnc)
         logging.debug('Encrypting ' + fileNameToEnc)
 
@@ -165,7 +157,7 @@ class Worker:
 
         # In determining the chunk size, determine the private key length used in bytes.
         # The data will be in decrypted in chunks
-        chunk_size = 128
+        chunk_size = 512
         offset = 0
         decrypted = ""
 
@@ -183,18 +175,19 @@ class Worker:
         # return the decompressed decrypted data
         return zlib.decompress(decrypted)
 
-    def do_DecryptFile(self, startPart, endPart, fileName, keyName):
+    def do_DecryptFile(self, startPart, endPart, fileName):
         procArr = []
         # pool = multiprocessing.Pool(processes=self.get_CPU_CoreNum())
         # pool = multiprocessing.Pool()
 
-        # keyName = 'priv' + keyName + '.pem'
-        # # Use the private key for decryption
-        # print('Opening Private Key For ' + fileName)
-        # logging.debug('Opening Private Key For ' + fileName)
-        # fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
-        # private_key = fd.read()
-        # fd.close()
+        keyName = 'priv' + fileName + '.pem'
+
+        # Use the private key for decryption
+        print('Opening Private Key For ' + fileName)
+        logging.debug('Opening Private Key For ' + fileName)
+        fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
+        private_key = fd.read()
+        fd.close()
 
         for partToDec in range(startPart, endPart + 1):
             strPartToDec = str(partToDec)
@@ -209,22 +202,14 @@ class Worker:
         # pool.close()
         # pool.join()
 
-            p = multiprocessing.Process(target=self.multiDecryptFile, args=(fileName, fileNameToDec, keyName))
+            p = multiprocessing.Process(target=self.multiDecryptFile, args=(fileNameToDec, private_key))
             procArr.append(p)
             p.start()
 
         for process in procArr:
             process.join()
 
-    def multiDecryptFile(self, fileName, fileNameToDec, keyName):
-        keyName = 'priv' + keyName + '.pem'
-        # Use the private key for decryption
-        print('Opening Private Key For ' + fileName)
-        logging.debug('Opening Private Key For ' + fileName)
-        fd = open(self.filePath + self.keyFilePath + keyName, 'rb')
-        private_key = fd.read()
-        fd.close()
-
+    def multiDecryptFile(self, fileNameToDec, private_key):
         print('Decrypting ' + fileNameToDec)
         logging.debug('Decrypting ' + fileNameToDec)
 
